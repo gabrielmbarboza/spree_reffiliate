@@ -1,0 +1,10 @@
+pt-BR:
+  spree:
+    promotion_rule_types:
+      referred_promotion_rule:
+        name: "Usuário referenciado"
+        description: "Deve ser um usuário referenciado"
+      affiliated_promotion_rule:
+        name: "Usuário afiliado"
+        description: "Deve ser um usuário referenciado"
+    edit_affiliate: "Editar afiliado:"

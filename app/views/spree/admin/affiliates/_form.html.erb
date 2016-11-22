@@ -1,27 +1,37 @@
-<div data-hook="admin_user_form_fields" class="row">
-  <div class="alpha six columns">
-    <%= f.field_container :name do %>
+<fieldset data-hook="new_affiliate">
+    <div data-hook="affiliate_name">
+    <%= f.field_container :name, class: ['form-group'] do %>
       <%= f.label :name, Spree.t(:name) %>
-      <%= f.text_field :name, class: 'fullwidth' %>
-      <%= error_message_on :user, :name %>
+      <%= f.text_field :name, class: 'form-control title' %>
+      <%= f.error_message_on :name %>
     <% end %>
-    <%= f.field_container :partial do %>
-      <%= f.label :partial, Spree.t(:partial) + " (leave blank if no partial) " %>
-      <p>app/views/spree/affiliates/<%= f.text_field :partial %></p>
-      <%= f.error_message_on :partial %>
-    <% end %>
-  </div>
+    <div>
 
-  <div class="omega six columns">
-    <%= f.field_container :path do %>
+    <%= f.field_container :partial, class: ['form-group']  do %>
+      <%= f.label :partial, Spree.t(:partial) + " (leave blank if no partial) " %>
+      <div class="input-group">
+        <span class="input-group-addon" id="partial-url">app/views/spree/affiliates/</span>
+        <%= f.text_field :partial, class: 'form-control title' %>
+        <%= f.error_message_on :partial %>
+      </div>
+    <% end %>
+
+    <%= f.field_container :path, class: ['form-group']  do %>
       <%= f.label :path, Spree.t(:path) %>
-      <%= f.text_field :path, class: 'fullwidth' %>
+      <%= f.text_field :path, class: 'form-control title' %>
       <%= f.error_message_on :path %>
     <% end %>
-    <%= f.field_container :path do %>
+
+  <div data-hook="affiliate_attrs" class="row">
+   <div data-hook="affiliate_layout" class="col-md-6">
+    <%= f.field_container :layout, class: ['form-group']  do %>
       <%= f.label :layout, Spree.t(:layout) %>
-      <%= select_tag 'fake_layout', options_for_select(@layout_options, selected: @affiliate.layout), class: "fullwidth #{'other' unless @layout_options.flatten.include?(@affiliate.layout)}" %>
-      <%= f.text_field :layout, value: @affiliate.layout.nil? ? @layout_options.first : @affiliate.layout, class: 'fullwidth' %>
+
+      <%= select_tag 'fake_layout',
+            options_for_select(@layout_options, selected: @affiliate.layout),
+            class: "select2 #{'other' unless @layout_options.flatten.include?(@affiliate.layout)}" %>
+      <%= f.text_field :layout, value: @affiliate.layout.nil? ? @layout_options.first : @affiliate.layout, class: 'form-control title' %>
+
       <script>
         var fake_layout = $("#fake_layout"),
             affiliate_layout = $("#affiliate_layout");
@@ -33,7 +43,7 @@
             affiliate_layout.val('layouts/application').show().focus();
           }
         });
-        if (!fake_layout.hasClass('other')) {
+        if (!fake_layout.hasClass('other ')) {
           affiliate_layout.hide();
         } else {
           fake_layout.val('');
@@ -41,5 +51,6 @@
       </script>
       <%= f.error_message_on :layout %>
     <% end %>
+    </div>
   </div>
-</div>
+</fieldset>
